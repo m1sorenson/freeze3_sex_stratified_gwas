@@ -35,15 +35,15 @@ freeze3_gwas
 
 ### Files
 
--	must have read access to all the freeze 2/3 summary statistics in the DAC directory
--	must have read access to all the genotyped freeze3 studies in the DAC directory
--	01_f3_gwas_v1.sh – this file contains all the commands to run the GWAS for genotyped studies and the meta-analysis across all studies (though it cannot be run all at once as a script as each code block contains SLURM jobs that need to finish before the next block can be run)
--	config:
-  - dosage_locations_f3.csv – this file contains study codes and ancestry codes, and determines which studies to be analyzed and included in the meta-analysis (only VETS is excluded because the GWAS is done using BOLT LMM rather than plink)
-  - study_weights.tsv – this file contains the effective N for all the case/control studies we have summary statistics for (and for studies with a differing allele frequency column for male/female/all summary stats, the file also includes the respective names of the allele frequency column)
-  - sumstat_studies.tsv – this file keeps track of which studies with summary statistics we are including in each analysis type (broad, male, female), this is important because some studies don’t have enough males/females to be included in one of the sex-stratified analyses, or we don’t have any sex-stratified summary statistics for the study.
--	f3_gwas_base_template.mi – this file is a template METAL file containing placeholders for male/female-specific file extensions, frequency column names, and effective N (weight). These placeholders are replaced with their values found in study_weights.tsv to create a semi-final METAL file f3_gwas_broad.mi, f3_gwas_males.mi, or f3_gwas_females.mi (it is semi-final because some studies may need to be commented out if they should be excluded from the respective meta-analysis due to missing/low N)
--	pheno folder – this folder was copied from /home/maihofer/freeze3_gwas, and it contains the phenotype and covariate info for each genotyped individual
+1. must have read access to all the freeze 2/3 summary statistics in the DAC directory
+2. must have read access to all the genotyped freeze3 studies in the DAC directory
+3. 01_f3_gwas_v1.sh – this file contains all the commands to run the GWAS for genotyped studies and the meta-analysis across all studies (though it cannot be run all at once as a script as each code block contains SLURM jobs that need to finish before the next block can be run)
+4. config:
+   - dosage_locations_f3.csv – this file contains study codes and ancestry codes, and determines which studies to be analyzed and included in the meta-analysis (only VETS is excluded because the GWAS is done using BOLT LMM rather than plink)
+   - study_weights.tsv – this file contains the effective N for all the case/control studies we have summary statistics for (and for studies with a differing allele frequency column for male/female/all summary stats, the file also includes the respective names of the allele frequency column)
+   - sumstat_studies.tsv – this file keeps track of which studies with summary statistics we are including in each analysis type (broad, male, female), this is important because some studies don’t have enough males/females to be included in one of the sex-stratified analyses, or we don’t have any sex-stratified summary statistics for the study.
+5. f3_gwas_base_template.mi – this file is a template METAL file containing placeholders for male/female-specific file extensions, frequency column names, and effective N (weight). These placeholders are replaced with their values found in study_weights.tsv to create a semi-final METAL file f3_gwas_broad.mi, f3_gwas_males.mi, or f3_gwas_females.mi (it is semi-final because some studies may need to be commented out if they should be excluded from the respective meta-analysis due to missing/low N)
+6. pheno folder – this folder was copied from /home/maihofer/freeze3_gwas, and it contains the phenotype and covariate info for each genotyped individual
 
 ## Usage
 ### STEP 1: Run the GWAS step for genotyped studies
