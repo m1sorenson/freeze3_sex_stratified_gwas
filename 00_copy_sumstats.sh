@@ -44,7 +44,7 @@ zcat ${dir}/ptsd_qt_vetsa_may12_2021_related_filtered.imputed.stats.gz \
   | awk 'BEGIN{OFS="\t"}{if (NR == 1 || ($7 >= 0.01 && $7 <= 0.99)){print}}' \
   | gzip > ${ss_dir}/VETS_males_eur.txt.gz
 # broad case control gwas
-zcat ${dir}/ptsd_qt_vetsa_may12_2021_related_filtered.imputed.stats.gz | awk 'BEGIN{OFS="\t"}{prev=77/(1012+77); if(NR==1){$11="OR"; print}if (NR>1 && $7 > 0.20 && $7 < 0.80) {$11=exp($11 /( prev *(1-prev))); $12 = $12  /( prev *(1-prev)); print} }' \
+zcat ${dir}/ptsd_dx_vetsa_may12_2021_related_filtered.imputed.stats.gz | awk 'BEGIN{OFS="\t"}{prev=77/(1012+77); if(NR==1){$11="OR"; print}if (NR>1 && $7 > 0.20 && $7 < 0.80) {$11=exp($11 /( prev *(1-prev))); $12 = $12  /( prev *(1-prev)); print} }' \
   | gzip > ${ss_dir}/VETS_broad_eur_allcase.txt.gz
 
 #-------------------------------------------------------------------------------
@@ -69,7 +69,8 @@ cp ${dir}/pts_ukbb_may13_2021_unrelated_females.bgen.stats.gz \
 zcat ${TMPDIR}/UKBB_females_eur.txt.gz | awk '{if(NR == 1 || ($7 >= 0.01 && $7 <= 0.99)){print}}' \
   | gzip > ${ss_dir}/UKBB_females_eur.txt.gz
 # broad case control gwas
-zcat ${dir}/pts_ukbb_may13_2021_unrelated.bgen.stats.gz | awk '{prev=10913/(124888+10913); if(NR==1) $11="OR"; if (NR>1) {$11=exp($11 /( prev *(1-prev))); $12 = $12  /( prev *(1-prev))}; print }' \
+dir=/home/pgca1pts/freeze3_bolt_data
+zcat ${dir}/pcldx_ukbb_may13_2021_unrelated.bgen.stats.gz | awk '{prev=10913/(124888+10913); if(NR==1) $11="OR"; if (NR>1) {$11=exp($11 /( prev *(1-prev))); $12 = $12  /( prev *(1-prev))}; print }' \
   | gzip > ${ss_dir}/UKBB_broad_eur_allcase.txt.gz
 
 
